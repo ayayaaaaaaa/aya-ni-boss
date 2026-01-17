@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Ada yang mau gue tanya</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffb3c1, #ffe5ec);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .slide {
+    display: none;
+    background: rgba(255,255,255,0.9);
+    padding: 40px 25px;
+    border-radius: 25px;
+    max-width: 360px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    animation: fade 0.8s ease;
+  }
+
+  .slide.active {
+    display: block;
+  }
+
+  h1 {
+    color: #e63946;
+  }
+
+  p {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  button {
+    margin: 12px;
+    background: #e63946;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+  }
+
+  .no {
+    background: #adb5bd;
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .heart {
+    position: absolute;
+    top: -10px;
+    font-size: 20px;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh);
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- SLIDE 1 -->
+<div class="slide active">
+  <h1>HAII!! Hehe</h1>
+  <p>Gue mau nanya boleh kan?</p>
+  <button onclick="next()">Iya</button>
+  <button class="no" onclick="next()">Boleh</button>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide">
+  <h1> Jujur ya</h1>
+  <p>
+     Lu percaya nggak kalo gue bilang
+     "I never feel this comfortable with someone before?"
+  </p>
+  <button onclick="next()">Percaya</button>
+  <button class="no" onclick="next()">Percaya dong</button>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide">
+  <h1>Here we go</h1>
+  <p>Sorry it took me so long to find the courage..</p>
+  <button onclick="next()">Lanjut</button>
+</div>
+
+<!-- SLIDE 4 (TEMBAKAN) -->
+<div class="slide">
+  <p>
+    Gue dulu takut buat mulai.
+    Sekarang gue masih takut, tapi
+    gue lebih takut kalo gak nyoba sama lu
+  </p>
+
+  <p>
+    Jadi…  
+    mau nggak lu jadi pacar gue?
+  </p>
+
+  <button onclick="yes()">YES</button>
+  <button class="no" onclick="errorNo()">NO</button>
+</div>
+
+<audio id="music" src="lagu.mp3" loop></audio>
+
+<script>
+  let i = 0;
+  const slides = document.querySelectorAll(".slide");
+
+  function next() {
+    slides[i].classList.remove("active");
+    i++;
+    slides[i].classList.add("active");
+  }
+
+  function yes() {
+    document.getElementById("music").play();
+    startHearts();
+    alert("YAHAHAHAHAHAAAAAAAA prank doang jir...");
+  }
+
+  function errorNo() {
+    alert("ERROR ❌\nGue gak menerima penolakan btw");
+  }
+
+  function startHearts() {
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "😂";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (3 + Math.random() * 2) + "s";
+      document.body.appendChild(heart);
+
+
+      setTimeout(() => heart.remove(), 5000);
+    }, 300);
+  }
+</script>
+
+</body>
+</html>
